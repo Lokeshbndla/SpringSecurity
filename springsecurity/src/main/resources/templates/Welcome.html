@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>Welcome to Our Application</h1>
+    
+    <!-- Check if the user is logged in -->
+    <div th:if="${#httpServletRequest.userPrincipal}">
+        <h2>User Details</h2>
+        <p>Username: <span th:text="${#httpServletRequest.userPrincipal.name}"></span></p>
+        <p>Role: <span th:text="${#httpServletRequest.userPrincipal.authorities}"></span></p>
+        <!-- Add a logout button -->
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+    </div>
+    
+    <!-- If not logged in, show login/signup options -->
+    <div th:unless="${#httpServletRequest.userPrincipal}">
+        <h2>Login / Sign Up</h2>
+        <!-- Add a login button -->
+        <a th:href="@{/login}">Login</a>
+        <!-- Add a signup button -->
+        <a th:href="@{/signup}">Sign Up</a>
+    </div>
+    
+    <!-- Add a random image -->
+    <img src="https://source.unsplash.com/random" alt="Random Image">
+</body>
+</html>
